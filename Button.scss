@@ -1,31 +1,60 @@
 .button {
-    display: flex;
+    position: relative;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    max-width: 320px;
-    height: 45px;
+    width: auto;
+    height: 38px;
     background: linear-gradient(91.55deg, #0ed9ce 24.9%, #42a7e3 81.66%);
-    box-shadow: 0 4px 11px rgba(0, 0, 0, .25);
-    text-shadow: 1px 1px 5px rgba(0, 0, 3, .30);
-    border-radius: 5px;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, .15);
+    text-shadow: 1px 1px 3px rgba(0, 0, 3, .15);
+    border-radius: 4px;
     border: 1px solid #42a7e3;
     cursor: pointer;
-    font-size: 1rem;
-    line-height: 1.2rem;
+    font-size: 16px;
+    font-weight: 300;
     color: #fff;
-    margin: 5px auto;
+    margin: 5px;
     text-decoration: none;
     transition: all .3s;
+    padding-left: 10px;
+    padding-right: 10px;
+    min-width: auto;
 
-    &:hover, &.active {
+    &:disabled, &:disabled:hover {
+        cursor: not-allowed;
+        opacity: .3;
+    }
+
+
+    &Blue {
+        background: #4460A0;
+        border-color: #4460A0;
+    }
+
+    &Big {
+        height: 45px;
+        font-size: 18px;
+    }
+
+    &Medium {
+        height: 38px;
+        font-size: 16px;
+    }
+
+    &Small {
+        height: 25px;
+        font-size: 14px;
+    }
+
+    &:hover, &Active {
         text-decoration: none;
         filter: brightness(0.95);
         color: #fff;
         transition: all .3s;
     }
 
-    &.outline {
+    &Outline {
         background: #ffffff;
         border: 1px solid #dbdbdb;
         color: #373737;
@@ -37,14 +66,12 @@
         }
     }
 
-    &.transparent {
+    &Transparent, &Round {
         background: transparent;
         border: 1px solid transparent;
         color: #373737;
         transition: all .3s;
         box-shadow: none;
-        width: 45px;
-        border-radius: 50%;
 
         &:hover {
             animation: pulse-animation 2s infinite;
@@ -55,23 +82,31 @@
         }
     }
 
-    &:disabled {
-        cursor: not-allowed;
-        opacity: .3;
+    &Round {
+        height: 38px;
+        width: 38px;
+        border-radius: 50%;
     }
 
-    & i {
+    &Fixed {
+        width: 100%;
+        max-width: 320px;
+        height: 38px;
+        font-size: 16px;
+
+        &.buttonBig {
+            font-size: 18px;
+        }
+
+        &.buttonSmall {
+            font-size: 14px;
+        }
+    }
+
+
+    .ff {
         color: inherit;
-        font-size: 32px;
     }
 }
 
 
-@keyframes pulse-animation {
-  0% {
-    box-shadow: 0 0 0 0 rgba(66, 167, 227, 0.15);
-  }
-  100% {
-    box-shadow: 0 0 0 20px rgba(66, 167, 227, 0);
-  }
-}
