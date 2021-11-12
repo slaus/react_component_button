@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import {Link} from "react-router-dom";
 
 import './Button.scss';
 
@@ -10,11 +11,19 @@ const Button = ({
                     className,
                     disabled,
                     active,
+                    outline,
+                    fixed,
+                    big,
+                    medium,
+                    small,
+                    transparent,
+                    blue,
+                    round,
                     ...attrs
-}) => {
+                }) => {
 
     const onClickAction = (e) => {
-        if(disabled) {
+        if (disabled) {
             e.preventDefault();
         } else {
             return onClick(e);
@@ -24,19 +33,43 @@ const Button = ({
     const buttonClasses = classNames(
         'button',
         className,
-        {active},
-        {...attrs},
+        {buttonActive: active},
+        {buttonOutline: outline},
+        {buttonFixed: fixed},
+        {buttonBig: big},
+        {buttonMedium: medium},
+        {buttonSmall: small},
+        {buttonTransparent: transparent},
+        {buttonBlue: blue},
+        {buttonRound: round},
     );
 
-    const Tag = attrs.href ? 'a' : 'button';
+    // const Tag = attrs.href ? 'a' : 'button';
 
     return (
-        <Tag
-            {...attrs}
-            className={buttonClasses}
-            disabled={disabled}
-            onClick={onClickAction}
-        >{children}</Tag>
+        <>
+            {attrs.to &&
+            <Link
+                to={attrs.to}
+                className={buttonClasses}
+                disabled={disabled}
+                onClick={onClickAction}
+                {...attrs}
+            >
+                {children}
+            </Link>
+            }
+            {!attrs.to &&
+            <button
+                className={buttonClasses}
+                disabled={disabled}
+                onClick={onClickAction}
+                {...attrs}
+            >
+                {children}
+            </button>
+            }
+        </>
     );
 };
 
@@ -45,19 +78,16 @@ Button.propTypes = {
     onClick: PropTypes.func,
     className: PropTypes.string,
     disabled: PropTypes.bool,
-    active: PropTypes.bool,
     size: PropTypes.string,
-    outline: PropTypes.bool,
 };
 
 Button.defaultProps = {
     children: 'Default Button',
-    onClick: () => {},
+    onClick: () => {
+    },
     className: '',
     disabled: false,
-    active: false,
     size: '',
-    outline: false,
 };
 
 export default Button;
